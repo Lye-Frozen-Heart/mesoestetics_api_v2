@@ -8,8 +8,10 @@ export interface Post {
   tags: Tag[]
   created_at: Date
   status: Status
+  likes:Number
   user_id: number
 }
+
 
 // export type NonSensitivePost = Pick<Post, 'title' | 'description' | 'images' | 'tags' |
 // 'status' > <-- Es lo mismo que lo de abajo pero cogiendo los campos que quieras!!
