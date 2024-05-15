@@ -1,4 +1,4 @@
-import { validatePost } from "../mappers/postMapper";
+import { validatePost } from "../validators/postMapper";
 const createPost = (repository) => {
   return async (req, res) => {
     const post = req.body;
