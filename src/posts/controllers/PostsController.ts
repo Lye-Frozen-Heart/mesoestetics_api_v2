@@ -1,12 +1,13 @@
-import createPost from "./createPost.js";
-import deletePost from "./deletePost.js";
-import getAllPosts from "./getAllPosts.js";
-import updatePost from "./updatePost.js";
-
+import createPost from "./createPost";
+import deletePost from "./deletePost";
+import getAllPosts from "./getAllPosts";
+import updatePost from "./updatePost";
+import getPost from "./getPost";
 const PostsController = (repository) => ({
-    getAllPosts: getAllPosts(repository),
-    createPost: createPost(repository),
-    updatePost: updatePost(repository),
-    deletePost: deletePost(repository)
+  getAllPosts: getAllPosts(repository),
+  getPost: getPost(repository),
+  createPost: createPost(repository),
+  updatePost: updatePost(repository),
+  deletePost: deletePost(repository),
 });
 export default PostsController;

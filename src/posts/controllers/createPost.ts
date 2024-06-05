@@ -9,7 +9,7 @@ const createPost = (repository) => {
       created_at: Date.now().toString(),
     };
 
-    await repository.addNote(newPost);
+    await repository.addPost(newPost);
     return res
       .status(201)
       .json({ ok: true, msg: "Post created successfully!" });

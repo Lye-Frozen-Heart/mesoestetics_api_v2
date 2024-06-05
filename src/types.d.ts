@@ -1,4 +1,4 @@
-export type Tag = "Rojo" | "Azul" | "Verde" | "Amarillo";
+export type Tag = "Red" | "Blue" | "Green" | "Yellow";
 export type Status =
   | "Cancelled"
   | "Hidden"
@@ -32,8 +32,3 @@ export interface User {
   email: string;
   created_at: Date;
 }
-
-// export type NonSensitivePost = Pick<Post, 'title' | 'description' | 'images' | 'tags' |
-// 'status' > <-- Es lo mismo que lo de abajo pero cogiendo los campos que quieras!!
-export type NonSensitivePost = Omit<Post, "id" | "user_id" | "created_at">;
-export type NonSensitiveUser = Omit<Post, "id" | "password" | "created_at">;

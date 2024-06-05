@@ -9,13 +9,13 @@ import {
   lineRed,
   log,
 } from "./utils/logger";
-import PostsInMongoRepository from "./posts/repositories/mongodb/PostsInMongoRepository";
 import postsRouterIoC from "./posts/router/postRouter";
+import MongoosePostsRepository from "./posts/repositories/mongodb/MongoosePostsRepository";
 
-const API_URL = process.env.MONGO_URL ?? undefined;
+const API_URL = process.env.MONGO_URL ?? "undefined";
 const PORT = process.env.PORT ?? 6060;
 
-const postsInMemoryRepository = PostsInMongoRepository();
+const postsInMemoryRepository = MongoosePostsRepository();
 
 const app = express();
 app.use(cors());
