@@ -11,12 +11,14 @@ import {
 } from "./utils/logger";
 import postsRouterIoC from "./posts/router/postRouter";
 import MongoosePostsRepository from "./posts/repositories/mongodb/MongoosePostsRepository";
+import usersRouterIoC from "./users/router/userRouter";
+import MongooseUsersRepository from "./users/repositories/mongodb/MongooseUsersRepository";
 
 const API_URL = process.env.MONGO_URL ?? "undefined";
 const PORT = process.env.PORT ?? 6060;
 
 const postsInMemoryRepository = MongoosePostsRepository();
-
+const usersInMemoryRepository = MongooseUsersRepository();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -24,7 +26,8 @@ app.use(express.json());
 mongoose.Promise = global.Promise;
 
 postsRouterIoC(app, postsInMemoryRepository);
-
+usersRouterIoC(app, usersInMemoryRepository);
+//usersRouterIoC(app, usersInMemoryRepository);
 app.listen(PORT, () => {
   lineDivider();
   lineFeed();
