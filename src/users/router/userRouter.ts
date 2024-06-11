@@ -6,8 +6,8 @@ const createUsersRouter = (repository) => {
   const usersController = UsersController(repository);
 
   usersRouter.get("/", usersController.getAllUsers);
-  usersRouter.get("/:id", usersController.getUser);
-  usersRouter.post("/", usersController.createUser);
+  usersRouter.post("/login", usersController.login);
+  usersRouter.post("/register", usersController.register);
   usersRouter.put("/:id", usersController.updateUser);
   usersRouter.delete("/:id", usersController.deleteUser);
 
