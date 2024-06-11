@@ -1,7 +1,7 @@
 const getPost = (repository) => {
   return async (req, res) => {
-    const posts = await repository.getPost(req.params.id);
-    return res.json({ ok: true, posts });
+    const post = await repository.getPost(req.params.id);
+    return res.json({ ok: true, post });
   };
 };
 

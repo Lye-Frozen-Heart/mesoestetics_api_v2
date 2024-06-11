@@ -7,7 +7,7 @@ const deletePost = (repository) => {
     if (!elementExists) {
       return res
         .status(404)
-        .json({ error: `Note with id ${postId} does not exist` });
+        .json({ error: `Post with id ${postId} does not exist` });
     }
 
     await repository.removePost(postId);

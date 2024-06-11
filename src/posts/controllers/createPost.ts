@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { validatePost } from "../validators/postMapper";
 const createPost = (repository) => {
   return async (req, res) => {
@@ -6,7 +7,7 @@ const createPost = (repository) => {
     if (!postIsValid) return res.status(400).json({ error: "Missing data..." });
     const newPost = {
       ...post,
-      created_at: Date.now().toString(),
+      created_at: dayjs().toISOString(),
     };
 
     await repository.addPost(newPost);

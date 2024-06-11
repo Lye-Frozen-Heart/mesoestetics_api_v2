@@ -3,6 +3,7 @@ import { PostsRepository } from "../PostsRepository";
 import { lineRed } from "../../../utils/logger";
 import postModel from "./models/post.model";
 import { isValidObjectId } from "../../../utils";
+import dayjs from "dayjs";
 const MongoosePostsRepository = (): PostsRepository => {
   return {
     getAllPosts: async function (): Promise<Post[]> {
@@ -10,7 +11,7 @@ const MongoosePostsRepository = (): PostsRepository => {
         const posts = await postModel.find({});
         return posts;
       } catch (error) {
-        lineRed(`Error al buscar posts: ${error}`);
+        lineRed(`Error trying to find posts: ${error}`);
         throw error;
       }
     },
@@ -21,7 +22,9 @@ const MongoosePostsRepository = (): PostsRepository => {
         if (post != null) return post;
         return null;
       } catch (error) {
-        lineRed(`Error al buscar el post: ${error}`);
+        lineRed(
+          `Error trying to find the post with id: ${id}, error found: ${error}`
+        );
         return null;
       }
     },
@@ -35,13 +38,13 @@ const MongoosePostsRepository = (): PostsRepository => {
           tags,
           likes: 0,
           status: "OnAir",
-          created_at: new Date().toISOString(),
-          user_id: 5,
+          created_at: dayjs().toISOString(),
+          user_id: 0,
         });
         await newPost.save();
         return newPost;
       } catch (error) {
-        lineRed(`Error al guardar el nuevo post: ${error}`);
+        lineRed(`Error trying to save the new post: ${error}`);
         return null;
       }
     },
@@ -59,7 +62,9 @@ const MongoosePostsRepository = (): PostsRepository => {
         });
         return post;
       } catch (error) {
-        lineRed(`Error al actualizar los likes del post: ${error}`);
+        lineRed(
+          `Error trying to update the post with id: ${id}, error found: ${error}`
+        );
         return null;
       }
     },
@@ -69,7 +74,9 @@ const MongoosePostsRepository = (): PostsRepository => {
         await postModel.findByIdAndDelete(id);
         return id;
       } catch (error) {
-        lineRed(`Error al eliminar el post: ${error}`);
+        lineRed(
+          `Error trying to remove the post with id: ${id}, error found: ${error}`
+        );
         return null;
       }
     },
@@ -82,7 +89,9 @@ const MongoosePostsRepository = (): PostsRepository => {
         const data = await postModel.findByIdAndUpdate(id, { likes });
         return data;
       } catch (error) {
-        lineRed(`Error al actualizar los likes del post: ${error}`);
+        lineRed(
+          `Error trying to update the likes from post: ${id}, error found: ${error}`
+        );
         return null;
       }
     },
