@@ -8,5 +8,4 @@ export function validateReward(reward) {
     typeof points_needed === "number" &&
     (type === "Product" || type === "Other")
   );
-  return true;
 }

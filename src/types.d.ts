@@ -28,7 +28,7 @@ export interface Post {
   created_at: Date;
   status: Status;
   likes: Number;
-  user_id: number;
+  user: string;
 }
 export interface User {
   id: string | null;

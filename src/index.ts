@@ -10,23 +10,27 @@ import {
   log,
 } from "./utils/logger";
 import postsRouterIoC from "./posts/router/postRouter";
-import MongoosePostsRepository from "./posts/repositories/mongodb/MongoosePostsRepository";
 import usersRouterIoC from "./users/router/userRouter";
+import rewardsRouterIoC from "./rewards/router/rewardRouter";
+import MongoosePostsRepository from "./posts/repositories/mongodb/MongoosePostsRepository";
 import MongooseUsersRepository from "./users/repositories/mongodb/MongooseUsersRepository";
+import MongooseRewardsRepository from "./rewards/repositories/mongodb/MongooseRewardsRepository";
 
 const API_URL = process.env.MONGO_URL ?? "undefined";
 const PORT = process.env.PORT ?? 6060;
 
-const postsInMemoryRepository = MongoosePostsRepository();
-const usersInMemoryRepository = MongooseUsersRepository();
+const postsRepository = MongoosePostsRepository();
+const usersRepository = MongooseUsersRepository();
+const rewardsRepository = MongooseRewardsRepository();
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 mongoose.Promise = global.Promise;
 
-postsRouterIoC(app, postsInMemoryRepository);
-usersRouterIoC(app, usersInMemoryRepository);
+postsRouterIoC(app, postsRepository);
+usersRouterIoC(app, usersRepository);
+rewardsRouterIoC(app, rewardsRepository);
 //usersRouterIoC(app, usersInMemoryRepository);
 app.listen(PORT, () => {
   lineDivider();

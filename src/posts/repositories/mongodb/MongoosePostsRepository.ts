@@ -30,7 +30,7 @@ const MongoosePostsRepository = (): PostsRepository => {
     },
     addPost: async function (Post: Post): Promise<Post | null> {
       try {
-        const { title, description, images = [], tags = [] } = Post;
+        const { title, description, images = [], tags = [], user } = Post;
         const newPost = new postModel({
           title,
           description,
@@ -39,7 +39,7 @@ const MongoosePostsRepository = (): PostsRepository => {
           likes: 0,
           status: "OnAir",
           created_at: dayjs().toISOString(),
-          user_id: 0,
+          user,
         });
         await newPost.save();
         return newPost;
