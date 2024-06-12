@@ -30,11 +30,12 @@ const MongooseRewardsRepository = (): RewardsRepository => {
     },
     addReward: async function (reward: Reward): Promise<Reward | null> {
       try {
-        const { reward_title, description, points_needed } = reward;
+        const { reward_title, description, points_needed, image } = reward;
         const newReward = new rewardsModel({
           reward_title,
           description,
-          points_needed,
+          points_needed: points_needed ?? 500,
+          image: image ?? "",
           created_at: dayjs().toISOString(),
           type: "Product",
         });
@@ -51,11 +52,12 @@ const MongooseRewardsRepository = (): RewardsRepository => {
     ): Promise<Reward | null> {
       if (!isValidObjectId(id)) return null;
       try {
-        const { reward_title, description, points_needed } = reward;
+        const { reward_title, description, points_needed, image } = reward;
         await rewardsModel.findByIdAndUpdate(id, {
           reward_title,
           description,
-          points_needed,
+          points_needed: points_needed ?? 500,
+          image: image ?? "",
         });
         return reward;
       } catch (error) {

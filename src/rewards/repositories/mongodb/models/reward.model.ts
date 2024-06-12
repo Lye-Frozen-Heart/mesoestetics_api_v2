@@ -6,6 +6,7 @@ const RewardSchema = new mongoose.Schema(
     description: String,
     points_needed: Number,
     type: String,
+    image: String,
     created_at: Date,
   },
   { collection: "rewards", strict: true }

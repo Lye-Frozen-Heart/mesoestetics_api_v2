@@ -43,6 +43,7 @@ export interface User {
 export interface Reward {
   id: string | null;
   reward_title: string;
+  image: string;
   description: string;
   points_needed: number;
   type: string;
