@@ -100,6 +100,18 @@ const MongooseUsersRepository = (): UsersRepository => {
         return null;
       }
     },
+    getUser: async function (id: string): Promise<User | null> {
+      if (!isValidObjectId(id)) return null;
+      try {
+        const user = await userModel.findById(id);
+        return user;
+      } catch (error) {
+        lineRed(
+          `Error trying to find the user with id: ${id}, error found: ${error}`
+        );
+        return null;
+      }
+    },
   };
 };
 export default MongooseUsersRepository;
