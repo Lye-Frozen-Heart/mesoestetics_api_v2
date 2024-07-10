@@ -13,112 +13,94 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("../../../utils/logger");
-const post_model_1 = __importDefault(require("./models/post.model"));
+const reward_model_1 = __importDefault(require("./models/reward.model"));
 const utils_1 = require("../../../utils");
 const dayjs_1 = __importDefault(require("dayjs"));
-const MongoosePostsRepository = () => {
+const MongooseRewardsRepository = () => {
     return {
-        getAllPosts: function () {
+        getAllRewards: function () {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const posts = yield post_model_1.default.find({});
-                    return posts;
+                    const rewards = yield reward_model_1.default.find({});
+                    return rewards;
                 }
                 catch (error) {
-                    (0, logger_1.lineRed)(`Error trying to find posts: ${error}`);
+                    (0, logger_1.lineRed)(`Error trying to find rewards: ${error}`);
                     throw error;
                 }
             });
         },
-        getPost: function (id) {
+        getReward: function (id) {
             return __awaiter(this, void 0, void 0, function* () {
                 if (!(0, utils_1.isValidObjectId)(id))
                     return null;
                 try {
-                    const post = yield post_model_1.default.findById(id);
-                    if (post != null)
-                        return post;
+                    const reward = yield reward_model_1.default.findById(id);
+                    if (reward != null)
+                        return reward;
                     return null;
                 }
                 catch (error) {
-                    (0, logger_1.lineRed)(`Error trying to find the post with id: ${id}, error found: ${error}`);
+                    (0, logger_1.lineRed)(`Error trying to find the reward with id ${id}, error found: ${error}`);
                     return null;
                 }
             });
         },
-        addPost: function (Post) {
+        addReward: function (reward) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const { title, description, images = [], tags = [], user } = Post;
-                    const newPost = new post_model_1.default({
-                        title,
+                    const { reward_title, description, points_needed, image } = reward;
+                    const newReward = new reward_model_1.default({
+                        reward_title,
                         description,
-                        images,
-                        tags,
-                        likes: 0,
-                        status: "OnAir",
+                        points_needed: points_needed !== null && points_needed !== void 0 ? points_needed : 500,
+                        image: image !== null && image !== void 0 ? image : "",
                         created_at: (0, dayjs_1.default)().toISOString(),
-                        user,
+                        type: "Product",
                     });
-                    yield newPost.save();
-                    return newPost;
+                    yield newReward.save();
+                    return newReward;
                 }
                 catch (error) {
-                    (0, logger_1.lineRed)(`Error trying to save the new post: ${error}`);
+                    (0, logger_1.lineRed)(`Error trying to save the new reward: ${error}`);
                     return null;
                 }
             });
         },
-        updatePost: function (id, post) {
+        updateReward: function (id, reward) {
             return __awaiter(this, void 0, void 0, function* () {
                 if (!(0, utils_1.isValidObjectId)(id))
                     return null;
                 try {
-                    const { title, description, tags, images, likes, status } = post;
-                    yield post_model_1.default.findByIdAndUpdate(id, {
-                        title,
+                    const { reward_title, description, points_needed, image } = reward;
+                    yield reward_model_1.default.findByIdAndUpdate(id, {
+                        reward_title,
                         description,
-                        tags,
-                        images,
-                        likes,
-                        status,
+                        points_needed: points_needed !== null && points_needed !== void 0 ? points_needed : 500,
+                        image: image !== null && image !== void 0 ? image : "",
                     });
-                    return post;
+                    return reward;
                 }
                 catch (error) {
-                    (0, logger_1.lineRed)(`Error trying to update the post with id: ${id}, error found: ${error}`);
+                    (0, logger_1.lineRed)(`Error trying to update the reward with id: ${id}, error found: ${error}`);
                     return null;
                 }
             });
         },
-        removePost: function (id) {
+        removeReward: function (id) {
             return __awaiter(this, void 0, void 0, function* () {
                 if (!(0, utils_1.isValidObjectId)(id))
                     return null;
                 try {
-                    yield post_model_1.default.findByIdAndDelete(id);
+                    yield reward_model_1.default.findByIdAndDelete(id);
                     return id;
                 }
                 catch (error) {
-                    (0, logger_1.lineRed)(`Error trying to remove the post with id: ${id}, error found: ${error}`);
-                    return null;
-                }
-            });
-        },
-        updateLikesFromPost: function (id, likes) {
-            return __awaiter(this, void 0, void 0, function* () {
-                if (!(0, utils_1.isValidObjectId)(id))
-                    return null;
-                try {
-                    const data = yield post_model_1.default.findByIdAndUpdate(id, { likes });
-                    return data;
-                }
-                catch (error) {
-                    (0, logger_1.lineRed)(`Error trying to update the likes from post: ${id}, error found: ${error}`);
+                    (0, logger_1.lineRed)(`Error trying to remove the reward with id: ${id}, error found: ${error}`);
                     return null;
                 }
             });
         },
     };
 };
-exports.default = MongoosePostsRepository;
+exports.default = MongooseRewardsRepository;

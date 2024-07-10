@@ -9,6 +9,7 @@ const createPostsRouter = (repository) => {
     const postsRouter = (0, express_1.Router)();
     const postsController = (0, PostsController_1.default)(repository);
     postsRouter.get("/", postsController.getAllPosts);
+    postsRouter.get("/:id", postsController.getPost);
     postsRouter.post("/", postsController.createPost);
     postsRouter.put("/:id", postsController.updatePost);
     postsRouter.delete("/:id", postsController.deletePost);

@@ -13,18 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const dayjs_1 = __importDefault(require("dayjs"));
-const postMapper_1 = require("../validators/postMapper");
-const createPost = (repository) => {
+const rewardMapper_1 = require("../validators/rewardMapper");
+const createReward = (repository) => {
     return (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const post = req.body;
-        const postIsValid = (0, postMapper_1.validatePost)(post);
-        if (!postIsValid)
+        const reward = req.body;
+        const rewardIsValid = (0, rewardMapper_1.validateReward)(reward);
+        const rewardExists = yield repository.getReward(reward.id);
+        if (!rewardIsValid)
             return res.status(400).json({ error: "Missing data..." });
-        const newPost = Object.assign(Object.assign({}, post), { created_at: (0, dayjs_1.default)().toISOString() });
-        yield repository.addPost(newPost);
+        if (rewardExists)
+            return res.status(404).json({ error: "Reward already exists" });
+        const newReward = Object.assign(Object.assign({}, reward), { created_at: (0, dayjs_1.default)().toISOString() });
+        yield repository.addReward(newReward);
         return res
             .status(201)
-            .json({ ok: true, msg: "Post created successfully!" });
+            .json({ ok: true, msg: "Reward created successfully!" });
     });
 };
-exports.default = createPost;
+exports.default = createReward;

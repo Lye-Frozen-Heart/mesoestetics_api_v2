@@ -9,19 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const deletePost = (repository) => {
-    return (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id: postId } = req.params;
-        const elementExists = yield repository.getPost(postId);
-        if (!elementExists) {
-            return res
-                .status(404)
-                .json({ error: `Post with id ${postId} does not exist` });
-        }
-        yield repository.removePost(postId);
-        return res
-            .status(200)
-            .json({ ok: true, msg: "Post deleted successfully!" });
+const getAllRewards = (repository) => {
+    return (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const rewards = yield repository.getAllRewards();
+        return res.json({ ok: true, rewards });
     });
 };
-exports.default = deletePost;
+exports.default = getAllRewards;

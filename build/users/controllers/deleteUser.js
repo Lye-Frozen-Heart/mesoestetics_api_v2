@@ -9,19 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const deletePost = (repository) => {
+const deleteUser = (repository) => {
     return (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id: postId } = req.params;
-        const elementExists = yield repository.getPost(postId);
+        const { id: userId } = req.params;
+        const elementExists = yield repository.getUser(userId);
         if (!elementExists) {
             return res
                 .status(404)
-                .json({ error: `Post with id ${postId} does not exist` });
+                .json({ error: `User with id ${userId} does not exist` });
         }
-        yield repository.removePost(postId);
+        yield repository.removeUser(userId);
         return res
             .status(200)
-            .json({ ok: true, msg: "Post deleted successfully!" });
+            .json({ ok: true, msg: "User deleted successfully!" });
     });
 };
-exports.default = deletePost;
+exports.default = deleteUser;

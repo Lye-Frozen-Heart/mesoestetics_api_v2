@@ -24,14 +24,26 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = __importStar(require("mongoose"));
-const PostSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    created_at: { type: String, required: true },
-    user: { type: String, required: true },
-    likes: { type: Number, required: true },
-    status: { type: String, required: true },
-    images: { type: [String] },
-    tags: { type: [String], required: true },
-}, { collection: "posts", strict: true });
-exports.default = mongoose.model("Post", PostSchema);
+const RewardSchema = new mongoose.Schema({
+    reward_title: String,
+    description: String,
+    points_needed: Number,
+    type: String,
+    image: String,
+    created_at: Date,
+}, { collection: "rewards", strict: true });
+exports.default = mongoose.model("Reward", RewardSchema);
+//OLD
+// import mongoose from "mongoose"
+// const rewardSchema = new mongoose.Schema({
+//   product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+//   reward_title: String,
+//   description: String,
+//   points_needed: Number,
+//   amount: Number,
+//   discount: Number,
+//   type: String,
+//   created_at:Date
+// });
+// const Reward = mongoose.model('Reward', rewardSchema);
+// module.exports = Reward;

@@ -15,15 +15,15 @@ const updatePost = (repository) => {
         const postContent = req.body;
         const { id: postId } = req.params;
         const postIsValid = (0, postMapper_1.validatePost)(postContent);
-        if (postIsValid)
+        if (!postIsValid)
             return res.status(400).json({ error: "Invalid property" });
         const elementExists = yield repository.getPost(postId);
         if (!elementExists) {
             return res
                 .status(404)
-                .json({ error: `Note with id ${postId} does not exist` });
+                .json({ error: `Post with id ${postId} does not exist` });
         }
-        yield repository.updateNote(postId, postContent);
+        yield repository.updatePost(postId, postContent);
         return res.status(200).json({ ok: true });
     });
 };

@@ -24,14 +24,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = __importStar(require("mongoose"));
-const PostSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    created_at: { type: String, required: true },
-    user: { type: String, required: true },
-    likes: { type: Number, required: true },
-    status: { type: String, required: true },
-    images: { type: [String] },
-    tags: { type: [String], required: true },
-}, { collection: "posts", strict: true });
-exports.default = mongoose.model("Post", PostSchema);
+const UserSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    created_at: { type: Date, default: Date.now },
+    liked_posts: { type: [String], default: [] },
+    points: { type: Number, default: 0 },
+    role: { type: String, default: "Regular" },
+}, { collection: "users", strict: true });
+exports.default = mongoose.model("User", UserSchema);
