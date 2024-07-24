@@ -30,7 +30,7 @@ const MongoosePostsRepository = (): PostsRepository => {
     },
     addPost: async function (Post: Post): Promise<Post | null> {
       try {
-        const { title, problem_description, solution_description, images = [], tags = [], user, rooms } = Post;
+        const { title, problem_description, solution_description, images = [], tags = [], user, rooms = [] } = Post;
         const newPost = new postModel({
           title,
           problem_description,

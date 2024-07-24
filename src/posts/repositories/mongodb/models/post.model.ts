@@ -12,7 +12,7 @@ const PostSchema = new mongoose.Schema(
     status: { type: String, required: true },
     images: { type: [String] },
     tags: { type: [String], required: true },
-    rooms: { type: [String], required: true },
+    rooms: { type: [String]},
   },
   { collection: "posts", strict: true }
 );
