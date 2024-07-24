@@ -8,7 +8,7 @@ const PostSchema = new mongoose.Schema(
     solution_description: { type: String, required: true },
     created_at: { type: String, required: true },
     user: { type: String, required: true },
-    likes: { type: Number, required: true },
+    likes: { type: [String], required: true },
     status: { type: String, required: true },
     images: { type: [String] },
     tags: { type: [String], required: true },
