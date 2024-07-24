@@ -30,16 +30,18 @@ const MongoosePostsRepository = (): PostsRepository => {
     },
     addPost: async function (Post: Post): Promise<Post | null> {
       try {
-        const { title, description, images = [], tags = [], user } = Post;
+        const { title, problem_description, solution_description, images = [], tags = [], user, rooms } = Post;
         const newPost = new postModel({
           title,
-          description,
+          problem_description,
+          solution_description,
           images,
           tags,
           likes: 0,
-          status: "OnAir",
+          status: "Plan",
           created_at: dayjs().toISOString(),
           user,
+          rooms,
         });
         await newPost.save();
         return newPost;
@@ -51,14 +53,16 @@ const MongoosePostsRepository = (): PostsRepository => {
     updatePost: async function (id: string, post: Post): Promise<Post | null> {
       if (!isValidObjectId(id)) return null;
       try {
-        const { title, description, tags, images, likes, status } = post;
+        const { title, problem_description, solution_description, tags, images, likes, status, rooms } = post;
         await postModel.findByIdAndUpdate(id, {
           title,
-          description,
+          problem_description,
+          solution_description,
           tags,
           images,
           likes,
           status,
+          rooms,
         });
         return post;
       } catch (error) {

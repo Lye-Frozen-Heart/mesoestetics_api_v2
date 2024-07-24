@@ -1,4 +1,3 @@
-export type Tag = "Red" | "Blue" | "Green" | "Yellow";
 export type Role = "Admin" | "Regular";
 export enum RoleEnum {
   Admin = "Admin",
@@ -6,29 +5,29 @@ export enum RoleEnum {
 }
 export type Status =
   | "Cancelled"
-  | "Hidden"
-  | "Accepted"
-  | "Seen"
-  | "Resolved"
-  | "OnAir";
+  | "Plan"
+  | "Do"
+  | "Check"
+  | "Act";
 export enum StatusEnum {
   "Cancelled",
-  "Hidden",
-  "Accepted",
-  "Seen",
-  "Resolved",
-  "OnAir",
+  "Plan",
+  "Do",
+  "Check",
+  "Act",
 }
 export interface Post {
   id: string | null;
   title: string;
-  description: string;
+  problem_description: string;
+  solution_description: string;
   images: string[];
-  tags: Tag[];
+  tags: string[];
   created_at: Date;
   status: Status;
-  likes: Number;
+  likes: string[];
   user: string;
+  rooms: string[];
 }
 export interface User {
   id: string | null;
