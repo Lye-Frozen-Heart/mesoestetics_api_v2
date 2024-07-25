@@ -1,7 +1,10 @@
-export type Role = "Admin" | "Regular";
+export type Role = "Admin" | "Regular" | "RewardsAdmin" | "PostsAdmin" | "ZoneAdmin";
 export enum RoleEnum {
   Admin = "Admin",
   Regular = "Regular",
+  RewardsAdmin = "RewardsAdmin",
+  PostsAdmin = "PostsAdmin",
+  ZoneAdmin = "ZoneAdmin",
 }
 export type Status =
   | "Cancelled"

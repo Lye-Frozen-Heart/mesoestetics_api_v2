@@ -86,7 +86,7 @@ const MongoosePostsRepository = (): PostsRepository => {
     },
     updateLikesFromPost: async function (
       id: string,
-      likes: string
+      likes: string[]
     ): Promise<Post | null> {
       if (!isValidObjectId(id)) return null;
       try {
