@@ -11,6 +11,8 @@ const createPostsRouter = (repository) => {
   postsRouter.post("/", postsController.createPost);
   postsRouter.put("/:id", postsController.updatePost);
   postsRouter.delete("/:id", postsController.deletePost);
+  // postsRouter.post('/:id/like', postsController.addLike);
+  // postsRouter.post('/:id/unlike', postsController.removeLike);
 
   return postsRouter;
 };
