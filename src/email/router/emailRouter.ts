@@ -1,24 +1,15 @@
-import { Router, Request, Response } from 'express';
-import transporter from '../controller/emailConfig';
+import { Router } from "express";
+import EmailController from "../controllers/EmailController";
 
-const emailRouter = Router();
+const createEmailRouter = () => {
+  const emailRouter = Router();
+  const emailController = EmailController();
+  emailRouter.post("/send-email", emailController.sendSupportEmail);
+  return emailRouter;
+};
 
-emailRouter.post('/send-email', (req: Request, res: Response) => {
-    const { recipient, subject, message } = req.body;
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: recipient,
-        subject,
-        text: message
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return res.status(500).send(error.toString());
-        }
-        res.status(200).send('Correo enviado: ' + info.response);
-    });
-});
-
-export default emailRouter;
+const emailRouterIoC = (app) => {
+  const emailsRouter = createEmailRouter();
+  app.use("/email", emailsRouter);
+};
+export default emailRouterIoC;
