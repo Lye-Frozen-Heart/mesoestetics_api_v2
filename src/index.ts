@@ -36,7 +36,7 @@ mongoose.Promise = global.Promise;
 postsRouterIoC(app, postsRepository);
 usersRouterIoC(app, usersRepository);
 rewardsRouterIoC(app, rewardsRepository);
-app.use('/api', emailRouter);
+app.use('/send-email', emailRouter);
 
 app.listen(PORT, () => {
     lineDivider();

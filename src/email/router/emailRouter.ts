@@ -9,7 +9,7 @@ emailRouter.post('/send-email', (req: Request, res: Response) => {
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: recipient,
-        subject: subject,
+        subject,
         text: message
     };
 
