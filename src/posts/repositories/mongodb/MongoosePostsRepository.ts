@@ -30,7 +30,15 @@ const MongoosePostsRepository = (): PostsRepository => {
     },
     addPost: async function (Post: Post): Promise<Post | null> {
       try {
-        const { title, problem_description, solution_description, images = [], tags = [], user, rooms = [] } = Post;
+        const {
+          title,
+          problem_description,
+          solution_description,
+          images = [],
+          tags = [],
+          user,
+          rooms = [],
+        } = Post;
         const newPost = new postModel({
           title,
           problem_description,
@@ -53,7 +61,16 @@ const MongoosePostsRepository = (): PostsRepository => {
     updatePost: async function (id: string, post: Post): Promise<Post | null> {
       if (!isValidObjectId(id)) return null;
       try {
-        const { title, problem_description, solution_description, tags, images, likes, status, rooms } = post;
+        const {
+          title,
+          problem_description,
+          solution_description,
+          tags,
+          images,
+          likes,
+          status,
+          rooms,
+        } = post;
         await postModel.findByIdAndUpdate(id, {
           title,
           problem_description,
@@ -88,18 +105,16 @@ const MongoosePostsRepository = (): PostsRepository => {
       id: string,
       likes: string[] = []
     ): Promise<Post | null> {
-      // if (!isValidObjectId(id)) return null;
-      // try {
-      //   const data = await postModel.findByIdAndUpdate(id, { likes });
-      //   return data;
-      // } catch (error) {
-      //   lineRed(
-      //     `Error trying to update the likes from post: ${id}, error found: ${error}`
-      //   );
-      console.log(id)
-      console.log(likes)
-      return null;
-      // }
+      if (!isValidObjectId(id)) return null;
+      try {
+        const data = await postModel.findByIdAndUpdate(id, { likes });
+        return data;
+      } catch (error) {
+        lineRed(
+          `Error trying to update the likes from post: ${id}, error found: ${error}`
+        );
+        return null;
+      }
     },
   };
 };
