@@ -15,7 +15,6 @@ import rewardsRouterIoC from "./rewards/router/rewardRouter";
 import MongoosePostsRepository from "./posts/repositories/mongodb/MongoosePostsRepository";
 import MongooseUsersRepository from "./users/repositories/mongodb/MongooseUsersRepository";
 import MongooseRewardsRepository from "./rewards/repositories/mongodb/MongooseRewardsRepository";
-import emailRouter from "./email/router/emailRouter";
 import dotenv from "dotenv";
 import emailRouterIoC from "./email/router/emailRouter";
 
@@ -27,7 +26,6 @@ const PORT = process.env.PORT ?? 6060;
 const postsRepository = MongoosePostsRepository();
 const usersRepository = MongooseUsersRepository();
 const rewardsRepository = MongooseRewardsRepository();
-//usersRouterIoC(app, usersInMemoryRepository);
 const app = express();
 app.use(cors());
 app.use(express.json());

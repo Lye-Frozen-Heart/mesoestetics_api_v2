@@ -84,20 +84,22 @@ const MongoosePostsRepository = (): PostsRepository => {
         return null;
       }
     },
-    updateLikesFromPost: async function (
+    likePost: async function (
       id: string,
-      likes: string[]
+      likes: string[] = []
     ): Promise<Post | null> {
-      if (!isValidObjectId(id)) return null;
-      try {
-        const data = await postModel.findByIdAndUpdate(id, { likes });
-        return data;
-      } catch (error) {
-        lineRed(
-          `Error trying to update the likes from post: ${id}, error found: ${error}`
-        );
-        return null;
-      }
+      // if (!isValidObjectId(id)) return null;
+      // try {
+      //   const data = await postModel.findByIdAndUpdate(id, { likes });
+      //   return data;
+      // } catch (error) {
+      //   lineRed(
+      //     `Error trying to update the likes from post: ${id}, error found: ${error}`
+      //   );
+      console.log(id)
+      console.log(likes)
+      return null;
+      // }
     },
   };
 };
